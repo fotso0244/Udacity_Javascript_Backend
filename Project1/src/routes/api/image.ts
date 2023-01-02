@@ -54,7 +54,7 @@ image.get('/', cache('10 minutes'), (req, res) => {
         await Resize(filename, width, height);
       };
       resizeImg(String(filename), width, height);
-      setTimeout(function() { 
+      setTimeout(function () {
         res.status(200).sendFile(file, options, function (err) {
           if (err) {
             throw err;
@@ -63,7 +63,6 @@ image.get('/', cache('10 minutes'), (req, res) => {
           }
         });
       }, 2000);
-      
     } else {
       res.status(200).sendFile(file, options, function (err) {
         if (err) {
