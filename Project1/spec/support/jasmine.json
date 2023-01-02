@@ -1,5 +1,5 @@
 {
-    "spec_dir": "dist/tests/jasmineTests",
+    "spec_dir": "build/tests/jasmineTests",
     "spec_files": [
         "*[sS]pec.js"
     ],
