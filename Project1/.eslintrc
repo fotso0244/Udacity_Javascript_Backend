@@ -1,7 +1,7 @@
 {
     "root": true,
     "plugins": [
-      "prettier"
+      "prettier", "jest"
     ],
     "extends": [
       "eslint:recommended",
@@ -13,12 +13,16 @@
       "no-var": "error",
       "prefer-const": "error"
     },
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "sourceType": "module",
-      "ecmaVersion": 2017
+      "ecmaVersion": 2020,
+      "requireConfigFile": false
     },
     "env": {
       "node": true,
-      "es6": true
+      "es6": true,
+      "jest/globals": true,
+      "jasmine": true
     }
 }

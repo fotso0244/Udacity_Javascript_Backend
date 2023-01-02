@@ -13,7 +13,7 @@ describe('Test endpoint and image processing', () => {
       )
       .expect('Content-Type', 'image/jpeg')
       .expect(200)
-      .end(function (err, res) {
+      .end(function (err) {
         if (err) {
           throw err;
         }
@@ -25,7 +25,7 @@ describe('Test endpoint and image processing', () => {
         '/api/images?name=istockphoto-1438115452-1024x1024&width=nht&height=200'
       )
       .expect(410)
-      .end(function (err, res) {
+      .end(function (err) {
         if (err) {
           throw err;
         }

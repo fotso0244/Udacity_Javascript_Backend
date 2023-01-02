@@ -5,18 +5,18 @@ import Resize from '../../utilities/resize2';
 import apicache from 'apicache';
 
 const image = express.Router();
-let cache = apicache.middleware;
+const cache = apicache.middleware;
 
 image.get('/', cache('10 minutes'), (req, res) => {
-  let filename: string = req.query.name as string;
-  let width: unknown = req.query.width as unknown as number;
-  let height: unknown = req.query.height as unknown as number;
-  var options = {
+  const filename = req.query.name;
+  const width = req.query.width;
+  const height = req.query.height;
+  const options = {
     root: path.join('./imageProcess')
   };
-  var file = `${filename}-${width}-${height}.jpg`;
-  var pathImgResize = `./imageProcess/${file}`;
-  var pathImgOrigin = `./imageSrc/${filename}.jpg`;
+  const file = `${filename}-${width}-${height}.jpg`;
+  const pathImgResize = `./imageProcess/${file}`;
+  const pathImgOrigin = `./imageSrc/${filename}.jpg`;
 
   if (!filename || !width || !height) {
     res.status(409);
@@ -31,10 +31,9 @@ image.get('/', cache('10 minutes'), (req, res) => {
 
   if (isNaN(+width) || isNaN(+height)) {
     res.status(410);
-    console.log(parseInt(width as string));
     throw new Error('Width or height is string type');
   }
-  if (height == 0 || width == 0) {
+  if (parseInt(String(height)) == 0 || parseInt(String(width)) == 0) {
     res.status(406);
     throw new Error("Width or height isn't positive number");
   }
@@ -42,7 +41,7 @@ image.get('/', cache('10 minutes'), (req, res) => {
     res.status(407);
     throw new Error('Name or width or height missing');
   }
-  if (height == -1 || width == -1) {
+  if (parseInt(String(height)) == -1 || parseInt(String(width)) == -1) {
     res.status(408);
     throw new Error('Width or height equal to -1');
   } else {
@@ -54,7 +53,7 @@ image.get('/', cache('10 minutes'), (req, res) => {
       ): Promise<void> => {
         await Resize(filename, width, height);
       };
-      resizeImg(filename, width, height);
+      resizeImg(String(filename), width, height);
       res.status(200).sendFile(file, options, function (err) {
         if (err) {
           throw err;
