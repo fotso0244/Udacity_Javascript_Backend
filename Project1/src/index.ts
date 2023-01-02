@@ -7,7 +7,7 @@ const port = 3550;
 app.use('/api', routes);
 
 app.listen(port, () => {
-    console.log(`server started at localhost:${port}`);
+  console.log(`server started at localhost:${port}`);
 });
 
 export default app;
