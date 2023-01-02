@@ -1,5 +1,6 @@
 import request from 'supertest';
 import app from '../../index';
+import sizeOf from 'image-size';
 
 describe('Test endpoint and image processing', () => {
   const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -33,5 +34,15 @@ describe('Test endpoint and image processing', () => {
   });
   afterEach(function () {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+  });
+});
+
+const file = 'istockphoto-1438115452-1024x1024-200-200.jpg';
+const pathImgResize = `./imageProcess/${file}`;
+const dimensions = sizeOf(pathImgResize);
+describe('Image processing', () => {
+  it('resize an image to width = 200 and height = 200', () => {
+    expect(dimensions.width).toEqual(200);
+    expect(dimensions.height).toEqual(200);
   });
 });
